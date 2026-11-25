@@ -1,12 +1,12 @@
-# GEMINI.md — Contexto para la auditoría de Club-Diablos
+# GEMINI.md — Contexto para la auditoría de Mi Liga GPT
 
 ## Qué es
 App web instalable (PWA) en JavaScript vainilla, SIN paso de compilación, para administrar
 equipos de fútbol amateur: cuentas, plantel con tarjetas y alineaciones, partidos, posiciones,
 brackets, finanzas (caja, depósitos, préstamos), actas, sanciones, calificación de jugadores,
 OCR, chatbot y WhatsApp. Multi-club y multi-equipo por club. Repo público:
-github.com/jorgecamberos100-sudo/Club-Diablos, rama main. Desplegada en GitHub Pages
-(https://jorgecamberos100-sudo.github.io/Club-Diablos/).
+github.com/jorgecamberos100-sudo/mi-liga-gpt, rama main. Desplegada en GitHub Pages
+(https://jorgecamberos100-sudo.github.io/mi-liga-gpt/).
 
 ## Cómo se ejecuta
 - Sin build: se sirve `index.html` tal cual (p. ej. `python3 -m http.server 8765`).
@@ -37,7 +37,7 @@ github.com/jorgecamberos100-sudo/Club-Diablos, rama main. Desplegada en GitHub P
   en el celular, descarga de CDN sin verificación de integridad — riesgo conocido).
 - `data/clubs/<club>/`: `club.json` (marca: nombre, escudo, colores, contacto),
   `players.json` (attrs vel/tir/pas/reg/def/fis 0-99), `teams/<equipo>.json`
-  (plantel, dorsales, finanzas, formato 11 o 7). Clubes reales: `diablos`, `ejemplo`.
+  (plantel, dorsales, finanzas, formato 11 o 7). Club de demostración: `ejemplo`.
 - `supabase/`: `schema.sql`, `verificar.sql`, `LEEME.md`.
 - `docs/`: `ACTAS.md`, `ASISTENTE.md`, `WHATSAPP.md` (WhatsApp solo documentado).
 - `tests/`: `run_all.sh` (todo), `check_syntax.sh`, `check_secrets.sh`,
@@ -92,8 +92,7 @@ github.com/jorgecamberos100-sudo/Club-Diablos, rama main. Desplegada en GitHub P
   (no enlazados al padrón). Sin datos en tiempo real en la página pública.
 
 ## LENTE DE PRODUCTO VENDIBLE (meta de negocio confirmada por George 2026-11-17)
-Club Diablos NO es solo la app de su equipo: la meta es VENDERLA como plataforma
-a ligas de fútbol amateur (páginas web por liga). Evalúa la auditoría también
+Mi Liga GPT es la plataforma para vender a ligas de fútbol amateur (páginas web por liga). Evalúa la auditoría también
 como producto vendible, además de cazar errores:
 - Modelo de plataforma ya construido: planes configurables (tabla `plans`,
   permisos por `can()`), Pro por contrato de liga (etapa 1b), finanzas de la liga
@@ -111,11 +110,8 @@ como producto vendible, además de cazar errores:
   vender y cuáles son pulido. No cambies precios ni decisiones de negocio; solo
   repórtalos.
 
-## DATOS REALES — REGLA DURA
-`data/clubs/diablos/` contiene datos REALES de dinero (caja, depósitos, préstamos)
-y de personas. NUNCA escribas en esos archivos ni en producción. Para probar usa
-solo el club `ejemplo` o el modo demo (`?demo`). Ningún cambio debe alterar ni
-una fila de datos reales.
+## DATOS — REGLA
+Esta copia no contiene datos reales de ningún club. Para probar usa solo el club `ejemplo` o el modo demo (`?demo`).
 
 ## Guardarraíles de esta auditoría
 - Sin secretos en código (la prueba `tests/check_secrets.sh` debe seguir verde).

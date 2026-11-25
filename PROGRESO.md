@@ -1,4 +1,4 @@
-# Avance de la plataforma (Club Diablos → equipos y ligas)
+# Avance de la plataforma (Mi Liga GPT → equipos y ligas)
 
 Estados: **Hecho y probado** = implementado y cubierto por pruebas automáticas. **Parcial** = existe, con huecos que se indican. **Pendiente** = no empezado.
 Importante: todo lo de Supabase se probó contra un PostgreSQL local con un simulador de Supabase (`tests/db`), **no contra un proyecto real**. Activar Supabase y repetir una prueba manual sigue siendo configuración externa (ver `supabase/LEEME.md`).
@@ -7,7 +7,7 @@ Importante: todo lo de Supabase se probó contra un PostgreSQL local con un simu
 |---|---|---|
 | 1. Cuentas, roles, ligas, planes configurables | Hecho y probado | Planes en tabla `plans`; la app pregunta `can()`, nunca "¿es Pro?". |
 | 1b. Invitaciones y Pro por contrato de liga | Hecho y probado | Código aleatorio de 48 bits, límite de intentos; el Pro de la liga es derivado y se quita solo al desvincular o vencer el contrato. |
-| 2. Gestión de equipos y jugadores | Hecho y probado | Equipos en base de datos con las mismas pantallas que los de archivo; Diablos y el club de ejemplo no se tocan. |
+| 2. Gestión de equipos y jugadores | Hecho y probado | Equipos en base de datos con las mismas pantallas que los de archivo; El club de ejemplo no se toca. |
 | 3. Torneos, inscripción, calendario, resultados, tabla, goleo | Hecho y probado | Ver detalle abajo. Desde la etapa 10 también grupos y eliminatorias. |
 | 4. Administradores con permisos, sanciones, objeciones y protestas, finanzas de liga, bitácora, reportes | Hecho y probado | Ver detalle abajo. Reportes en CSV y, desde la etapa 10, para imprimir o guardar como PDF. |
 | 5. Registro de jugadores, padrón central, credenciales | Hecho y probado | Ver detalle abajo. `match_events.player_id` sigue sin enlazarse al padrón (los goleadores se escriben a mano). |
@@ -103,7 +103,7 @@ Un agente aparte, sin haber visto el trabajo, revisó el repositorio y encontró
 - **Privacidad por omisión:** la página pública no publica nombres (la liga elige «iniciales» o «completo»); si la liga marca que hay menores, la base impide publicarlos; hora y cancha se pueden ocultar. El reglamento escrito ya no sale en la API pública. El logo de la liga solo puede ser un archivo de nuestro almacén.
 - **Aviso de privacidad y consentimiento:** cada liga publica un aviso versionado (plantilla con partes [entre corchetes] por completar; no es asesoría legal). Sin aviso no se registra a nadie. Quien se registra por enlace lo acepta; la liga o el delegado declaran el consentimiento; para menores de 18 años se exigen nombre y autorización de madre, padre o tutor. Queda guardado con la versión. Si el aviso cambia, lo aceptado antes ya no vale en el enlace.
 - **Datos mínimos:** el documento de identidad ya no se pide por omisión; la fecha de nacimiento es obligatoria (sin ella no se sabe si es menor). **Derecho a borrar:** «Borrar sus datos personales» deja un registro anónimo y elimina la foto.
-- **Finanzas de equipos de la app privadas** por omisión (solo jugadores aprobados); el administrador puede abrirlas. Diablos y el ejemplo siguen como siempre.
+- **Finanzas de equipos de la app privadas** por omisión (solo jugadores aprobados); el administrador puede abrirlas. El club de ejemplo sigue como siempre.
 - **Preparación para Supabase:** `supabase/verificar.sql` (10 revisiones de solo lectura, probadas también en negativo), `tests/check_secrets.sh` (sin claves secretas en archivos ni historial), migraciones de datos de una sola vez (`schema_migrations`), reaplicar el esquema con datos sin cambiar ninguna fila (probado), registro con «Confirm email» encendido, guía con clave publicable y pasos verificados en la documentación de Supabase.
 - **Prueba integral** de los 10 flujos (`tests/e2e/test_integral.py`, con control positivo) y **matriz de acceso** en la base (anon, cuenta sin rol, otra liga y administrador limitado no leen ni escriben datos ajenos).
 

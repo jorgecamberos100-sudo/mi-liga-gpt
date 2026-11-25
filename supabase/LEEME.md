@@ -1,8 +1,8 @@
-# Activar Club Diablos con Supabase real (guía de activación)
+# Activar Mi Liga GPT con Supabase real (guía de activación)
 
 **Estado honesto:** el código y el SQL se probaron contra PostgreSQL 16 local con un simulador de Supabase (que imita sus permisos por omisión) y contra el modo demo del navegador. **Nunca se ha activado contra un proyecto real de Supabase.** No declares la app lista para producción hasta completar el punto 6.
 
-Mientras `app/config.js` esté vacío, la app funciona como siempre (Diablos y el club de ejemplo desde sus archivos, sin cuentas). Para probar cuentas, ligas y torneos sin servidor: agrega `?demo` antes del `#` del enlace (por ejemplo `.../Club-Diablos/?demo#/cuenta`). En demo todo se guarda solo en ese navegador.
+Mientras `app/config.js` esté vacío, la app funciona como siempre (el club de ejemplo desde sus archivos, sin cuentas). Para probar cuentas, ligas y torneos sin servidor: agrega `?demo` antes del `#` del enlace (por ejemplo `.../mi-liga-gpt/?demo#/cuenta`). En demo todo se guarda solo en ese navegador.
 
 ## Pasos, en este orden (unos 30 minutos)
 
@@ -14,8 +14,8 @@ Mientras `app/config.js` esté vacío, la app funciona como siempre (Diablos y e
 
 ### 2. Cuentas con correo
 1. **Authentication > URL Configuration**:
-   - **Site URL**: `https://jorgecamberos100-sudo.github.io/Club-Diablos/`
-   - **Redirect URLs**: agrega `https://jorgecamberos100-sudo.github.io/Club-Diablos/**`
+   - **Site URL**: `https://jorgecamberos100-sudo.github.io/mi-liga-gpt/`
+   - **Redirect URLs**: agrega `https://jorgecamberos100-sudo.github.io/mi-liga-gpt/**`
 2. **Authentication > Sign In / Providers > Email**: deja **Confirm email** encendido (recomendado). La app avisa que hay que abrir el correo de confirmación. Si lo apagas, cualquiera puede crear cuentas con correos que no son suyos.
 3. Para producción, configura un **servidor de correo propio (SMTP)** en la sección de correos de Authentication: Supabase indica que su correo incluido es para pruebas y tiene un límite bajo de envíos. (No verificado aquí: revisa la página de Supabase al hacerlo.)
 
@@ -37,7 +37,7 @@ Guía oficial: https://supabase.com/docs/guides/auth/social-login/auth-google
 4. Sube el cambio a `main` (GitHub Pages lo publica solo).
 
 ### 5. Primer uso
-1. Entra tú primero. En `#/cuenta` elige «Liga» y crea tu liga: quedas como **superadministrador**. Para Diablos, entra y elige tu nombre: la primera cuenta queda como administrador del equipo.
+1. Entra tú primero. En `#/cuenta` elige «Liga» y crea tu liga: quedas como **superadministrador**.
 2. En **Ajustes** de la liga, antes de registrar jugadores: **Privacidad** (aviso de privacidad, contacto, y si hay menores). Sin aviso publicado la app no deja registrar a nadie.
 3. Planes: tabla `plans`. Funciones (`features`) y límites (`limits`) se cambian ahí sin tocar código. Los precios quedan vacíos: la app no cobra.
 4. Dar Pro a un equipo a mano: fila en `subscriptions` con `subject_type` = team, `subject_id` = `club/equipo` y `plan_id` = `team-pro`. Nadie puede darse Pro desde la app.
@@ -78,7 +78,7 @@ Los crea `schema.sql` con tope de tamaño y solo imágenes JPG, PNG o WEBP (nada
 - **La plantilla del aviso no es asesoría legal.** Tiene partes entre [corchetes] que la liga completa y revisa con quien la asesore. La app no garantiza el cumplimiento de ninguna ley (por ejemplo, la de protección de datos de tu país).
 - **Documento de identidad:** no se pide por omisión; la liga lo activa solo si de verdad lo necesita.
 - **Derecho a borrar:** en Jugadores > Editar > «Borrar sus datos personales». Quedan los resultados históricos sin datos personales.
-- **Finanzas de equipos de la app:** solo las ven los jugadores aprobados del equipo, salvo que el administrador las abra. Diablos y el ejemplo siguen como siempre (sus datos salen de los archivos del repositorio).
+- **Finanzas de equipos de la app:** solo las ven los jugadores aprobados del equipo, salvo que el administrador las abra. El club de ejemplo sigue como siempre (sus datos salen de los archivos del repositorio).
 
 ## Servicios opcionales que NO vienen desplegados
 - Lectura automática de actas con servicio propio: `docs/ACTAS.md`.
@@ -88,6 +88,6 @@ Los crea `schema.sql` con tope de tamaño y solo imágenes JPG, PNG o WEBP (nada
 ## Probar el código (para quien lo mantenga)
 `sh tests/run_all.sh` corre todo: sintaxis, búsqueda de secretos, base de datos (PostgreSQL 16 temporal), pruebas unitarias y de navegador en modo demo. Requiere PostgreSQL 16, Node y Python con Playwright.
 
-## Pagos del equipo (Diablos)
+## Pagos del equipo
 - El jugador, en **Finanzas > Mi cuenta**, toca **Ya pagué**, pone la cantidad y la foto del comprobante. Queda en revisión; al aprobar se actualizan su cuenta, la caja y lo que falta.
 - En el **Panel de administrador** se registran pagos en efectivo, uniformes y lo que se paga a la liga. Los comprobantes son privados.
