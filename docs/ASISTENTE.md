@@ -21,6 +21,12 @@ Estado: **implementado y probado** el motor local por reglas (pruebas unitarias 
 - Las respuestas locales no consumen tope.
 - El servicio debería fijar un máximo de tokens de salida y un presupuesto mensual en el panel del proveedor.
 
+## Confirmar antes de registrar (regla)
+- Cuando alguien le pega una imagen al chat (por ejemplo, la foto del reporte arbitral / acta), el chat NO da por hecho lo que entendió ni registra nada directo.
+- Primero el chat muestra lo que entendió, punto por punto (por ejemplo: marcador, goles con su jugador y equipo, tarjetas), y espera.
+- Solo cuando el usuario confirma («sí, así es» o corrige), el chat sigue adelante y registra. Si el usuario corrige, el chat usa la corrección, no lo que entendió.
+- Esta regla vale para cualquier imagen que el chat interprete, no solo el reporte arbitral. El borrador de acta en la pantalla de Actas ya pide confirmación aparte («Confirmar y registrar»); el chat debe pedirla igual antes de registrar.
+
 ## Instrucciones recomendadas para el modelo del servicio
 Responder solo con el contexto recibido; si falta el dato, decir que no lo tiene; no dar opiniones ni datos personales; contestar en español, breve.
 
@@ -28,3 +34,4 @@ Responder solo con el contexto recibido; si falta el dato, decir que no lo tiene
 - Desplegar y probar un servicio real (y medir su costo con tráfico real).
 - Contar cuántas preguntas locales hubo (hoy solo se cuentan las del servicio).
 - Mejorar las reglas con las preguntas reales de los usuarios.
+- Chat de admin con acciones: cuando se construya, debe cumplir la regla de confirmar antes de registrar.
